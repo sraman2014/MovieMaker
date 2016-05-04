@@ -1,0 +1,46 @@
+﻿ 
+.container {
+  width: 40%;
+  height:40%;
+  top:60%;
+  background-color: white;
+}
+table {
+  width: 80%;
+  margin: auto;
+  background-color: blue;
+}
+td {
+  width: 50%;
+  color: white;
+}
+ 
+
+#header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+#videoPlayer {
+    line-height:30px;
+    background-color:#303030;
+    height:300px;
+    width:45%;
+    float:left;
+    padding:5px;	      
+}
+#playList {
+    width:25%;
+    float:left;
+    padding:10px;	
+    
+}
+#footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+   padding:5px;	 	 
+}
+

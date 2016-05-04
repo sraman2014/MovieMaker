@@ -1,0 +1,66 @@
+﻿
+
+    <div  ng-controller="clipLibraryController">
+        <h1>Create Library</h1>
+        <div id="header">
+
+        </div>
+
+
+        <div id="videoPlayer" style="height:400px" data-ng-controller="clipLibraryController" >
+            <div id="player_div"></div>
+        </div>
+
+        <div id="cliplist" style="overflow:scroll;height:500px">
+            <table class="table table-striped">
+                <thead></thead>
+                <tbody ng-repeat="vf in videoFiles">
+                <td>
+                    {{vf.mediaName}}
+                </td>
+                <td>
+                    <!--<img src="/Media/Thumbnails/VideoFiles/{{vf.id}}.png" style="width:150px;height:70px;" />-->
+                    Full Media Content
+                </td>
+                
+                <td>
+                    <button class="btn btn-sm btn-warning" data-toggle="tooltip" title="Create Clip" ui-sref="create" ng-click="createClip(vf.mediaName, vf.id);">+</button>
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-success" data-toggle="tooltip" title="Play" ng-click="playClip(vf.id, 0);">></button>
+                </td>
+                <td></td>
+                </tbody>
+
+
+                <tbody ng-repeat="clip in clips">
+                <td>
+                    {{clip.clipName}}
+                </td>
+                    <td>
+                         <!--<img src="../Media/Thumbnails/1/{{clip.id}}.png" style="width:150px;height:70px;" />-->
+                         <!--{{clip.startPosition}}s to {{clip.duration}}s--> Fragment 
+                    </td>
+               
+                    <td>
+                        <button data-toggle="tooltip" title="Delete Clip" class="btn btn-sm btn-danger" ng-click="deleteClip(clip.id);">X</button>
+                    </td>
+       
+                    <td>
+                        <button data-toggle="tooltip" title="Play" class="btn btn-sm btn-success" ng-click="playClip(clip.mediaID, clip.startPosition, clip.duration);">></button>
+                    </td>
+                    <td>
+                        <button data-toggle="tooltip"  ui-sref="edit" title="Edit Clip" class="btn btn-sm btn-warning" ng-click="editClip(clip.id, clip.clipName, clip.startPosition, clip.duration, clip.mediaID);">!</button>
+                    </td>
+                </tbody>
+            </table>
+        </div>
+        <div id="footer">
+            <h5>Copyright(C) Media Maker Inc.</h5>
+        </div>
+
+        <script src="../Scripts/App/app.js"></script>
+        <script src="../Services/sharedProperties.js"></script>
+        <script src="../Controllers/clipLibraryController.js"></script>
+    </div>
+

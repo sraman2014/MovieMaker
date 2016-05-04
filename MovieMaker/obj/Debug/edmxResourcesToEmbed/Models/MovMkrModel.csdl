@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VideoManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Clip">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MediaID" Type="Int32" Nullable="false" />
+    <Property Name="ClipName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ThumbnailFile" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="StartPosition" Type="Int32" Nullable="false" />
+    <Property Name="Duration" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="FullMediaName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="VideoFile" Relationship="Self.CNS_FK_MEDIAID" FromRole="Clip" ToRole="VideoFile" />
+  </EntityType>
+  <EntityType Name="VideoFile">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MediaName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Clips" Relationship="Self.CNS_FK_MEDIAID" FromRole="VideoFile" ToRole="Clip" />
+  </EntityType>
+  <Association Name="CNS_FK_MEDIAID">
+    <End Role="VideoFile" Type="Self.VideoFile" Multiplicity="1" />
+    <End Role="Clip" Type="Self.Clip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VideoFile">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Clip">
+        <PropertyRef Name="MediaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MovMkrEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Clips" EntityType="Self.Clip" />
+    <EntitySet Name="VideoFiles" EntityType="Self.VideoFile" />
+    <AssociationSet Name="CNS_FK_MEDIAID" Association="Self.CNS_FK_MEDIAID">
+      <End Role="VideoFile" EntitySet="VideoFiles" />
+      <End Role="Clip" EntitySet="Clips" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

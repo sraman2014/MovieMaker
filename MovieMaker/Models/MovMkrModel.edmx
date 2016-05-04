@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="VideoManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clip">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MediaID" Type="int" Nullable="false" />
+          <Property Name="ClipName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ThumbnailFile" Type="nvarchar" MaxLength="1000" />
+          <Property Name="StartPosition" Type="int" Nullable="false" />
+          <Property Name="Duration" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="FullMediaName" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="VideoFile">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MediaName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <Association Name="CNS_FK_MEDIAID">
+          <End Role="VideoFile" Type="Self.VideoFile" Multiplicity="1" />
+          <End Role="Clip" Type="Self.Clip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VideoFile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Clip">
+              <PropertyRef Name="MediaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VideoManagerModelStoreContainer">
+          <EntitySet Name="Clip" EntityType="Self.Clip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VideoFile" EntityType="Self.VideoFile" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="CNS_FK_MEDIAID" Association="Self.CNS_FK_MEDIAID">
+            <End Role="VideoFile" EntitySet="VideoFile" />
+            <End Role="Clip" EntitySet="Clip" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VideoManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clip">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MediaID" Type="Int32" Nullable="false" />
+          <Property Name="ClipName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ThumbnailFile" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="StartPosition" Type="Int32" Nullable="false" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="FullMediaName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="VideoFile" Relationship="Self.CNS_FK_MEDIAID" FromRole="Clip" ToRole="VideoFile" />
+        </EntityType>
+        <EntityType Name="VideoFile">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MediaName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Clips" Relationship="Self.CNS_FK_MEDIAID" FromRole="VideoFile" ToRole="Clip" />
+        </EntityType>
+        <Association Name="CNS_FK_MEDIAID">
+          <End Role="VideoFile" Type="Self.VideoFile" Multiplicity="1" />
+          <End Role="Clip" Type="Self.Clip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VideoFile">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Clip">
+              <PropertyRef Name="MediaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MovMkrEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clips" EntityType="Self.Clip" />
+          <EntitySet Name="VideoFiles" EntityType="Self.VideoFile" />
+          <AssociationSet Name="CNS_FK_MEDIAID" Association="Self.CNS_FK_MEDIAID">
+            <End Role="VideoFile" EntitySet="VideoFiles" />
+            <End Role="Clip" EntitySet="Clips" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VideoManagerModelStoreContainer" CdmEntityContainer="MovMkrEntities1">
+          <EntitySetMapping Name="Clips">
+            <EntityTypeMapping TypeName="VideoManagerModel.Clip">
+              <MappingFragment StoreEntitySet="Clip">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MediaID" ColumnName="MediaID" />
+                <ScalarProperty Name="ClipName" ColumnName="ClipName" />
+                <ScalarProperty Name="ThumbnailFile" ColumnName="ThumbnailFile" />
+                <ScalarProperty Name="StartPosition" ColumnName="StartPosition" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="FullMediaName" ColumnName="FullMediaName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VideoFiles">
+            <EntityTypeMapping TypeName="VideoManagerModel.VideoFile">
+              <MappingFragment StoreEntitySet="VideoFile">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MediaName" ColumnName="MediaName" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

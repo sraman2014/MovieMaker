@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="../Scripts/jquery-2.2.3.min.js"></script>
+    <script src="../Scripts/angular.min.js"></script>
+    <script src="../Scripts/AngularUI/ui-router.js"></script>
+    
+    <script type="text/javascript" src="../Scripts/mediaelement-and-player.min.js"></script>
+    <script type="text/javascript" src="../Scripts/smfplayer.min.js"></script>
+    <link href="../Content/bootstrap.darkly.css" rel="stylesheet" />
+    <link href="Content/mediaelementplayer.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../Scripts/smfplayer.css" />
+    <link href="../Content/appStyle.css" rel="stylesheet" />
+
+ 
+
+</head>
+<body ng-app="movieMakerSite">
+    <!--Nav menu-->
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" ui-sref="#">Movie Maker</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a ui-sref="home">Home</a></li>
+            <li><a ui-sref="create">Create</a></li>
+            <li><a ui-sref="edit">Edit</a></li>
+        </ul>
+    </nav>
+    <!--View-->
+    <div ui-view></div>
+
+    <script src="../Scripts/App/app.js"></script>
+    <script src="../Services/sharedProperties.js"></script>
+    <script src="../Controllers/clipLibraryController.js"></script>
+    <script src="../Controllers/createClipController.js"></script>
+
+</body>
+</html>

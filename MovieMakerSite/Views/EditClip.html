@@ -1,0 +1,70 @@
+﻿<!--<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="../Scripts/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="../Scripts/mediaelement-and-player.min.js"></script>
+    <script type="text/javascript" src="../Scripts/smfplayer.min.js"></script>
+    <link href="../Content/bootstrap.darkly.css" rel="stylesheet" />
+    <script src="../Scripts/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../Scripts/mediaelementplayer.min.css" />
+    <link rel="stylesheet" type="text/css" href="../Scripts/smfplayer.css" />
+    <link href="../Content/appStyle.css" rel="stylesheet" />
+</head>-->
+<div ng-controller="editClipController" ng-init="init();">
+    <h1>Edit Clip</h1>
+    <div id="header">
+
+    </div>
+    <div id="videoPlayer" style="height:400px">
+        <div id="player_div"></div>
+    </div>
+
+    <form class="form-horizontal">
+        <fieldset>
+            <legend>Edit Clip</legend>
+            <div class="form-group">
+                <label for="mediaID" class="col-xs-4 control-label">Clip ID</label>
+                <div class="col-xs-6">
+                    <input ng-model="clipID" type="text" class="form-control" id="mediaID" value="1" disabled="true">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="clipName" class="col-xs-4 control-label">Clip Name</label>
+                <div class="col-xs-6">
+                    <input ng-model="clipName" type="text" class="form-control" id="clipName" ">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="startPosition" class="col-xs-4 control-label">Start Position</label>
+                <div class="col-xs-6">
+                    <input ng-model="startPosition" type="text" class="form-control" id="startPosition">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="endPosition" class="col-xs-4 control-label">End Position</label>
+                <div class="col-xs-6">
+                    <input ng-model="endPosition" type="text" class="form-control" id="endPosition">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-6 col-xs-offset-4">
+                    <button type="reset" ng-click="clearForm();" class="btn btn-default">Cancel</button>
+                    <button type="submit" ng-click="updateClip();" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+
+
+
+
+    <script src="../Scripts/App/app.js"></script>
+    <script src="../Services/sharedProperties.js"></script>
+    <script src="../Controllers/editClipController.js"></script>
+</div>
+ 

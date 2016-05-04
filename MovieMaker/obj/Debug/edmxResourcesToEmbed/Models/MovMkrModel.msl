@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="VideoManagerModelStoreContainer" CdmEntityContainer="MovMkrEntities1">
+    <EntitySetMapping Name="Clips">
+      <EntityTypeMapping TypeName="VideoManagerModel.Clip">
+        <MappingFragment StoreEntitySet="Clip">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="MediaID" ColumnName="MediaID" />
+          <ScalarProperty Name="ClipName" ColumnName="ClipName" />
+          <ScalarProperty Name="ThumbnailFile" ColumnName="ThumbnailFile" />
+          <ScalarProperty Name="StartPosition" ColumnName="StartPosition" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="FullMediaName" ColumnName="FullMediaName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VideoFiles">
+      <EntityTypeMapping TypeName="VideoManagerModel.VideoFile">
+        <MappingFragment StoreEntitySet="VideoFile">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="MediaName" ColumnName="MediaName" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
